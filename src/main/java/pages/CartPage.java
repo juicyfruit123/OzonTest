@@ -1,5 +1,7 @@
 package pages;
 
+import io.qameta.allure.Allure;
+import io.qameta.allure.Step;
 import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -29,10 +31,12 @@ public class CartPage extends BasePage {
     }
 
     public void checkCountProduct(String count) {
+        String actualCount = null;
         try {
-            Assert.assertEquals(count, countProduct.getText().substring(0, countProduct.getText().indexOf("•")).trim());
+            actualCount = countProduct.getText().substring(0, countProduct.getText().indexOf("•")).trim();
+            Assert.assertEquals(count, actualCount);
         } catch (AssertionError e) {
-            System.out.println("не найдено столько элементов");
+            Allure.addAttachment("не найдено столько товаров", "найдено " + actualCount);
         }
     }
 

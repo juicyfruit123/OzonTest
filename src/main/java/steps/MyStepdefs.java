@@ -18,7 +18,7 @@ public class MyStepdefs {
     public void priceLimit(String limit) {
         mainPageStep.priceLimit(limit);
     }
-
+    
     @Тогда("отметить чекбокс {string} {string}")
     public void clickCheckBox(String name, String bool) {
         if (bool.equals("true")) {

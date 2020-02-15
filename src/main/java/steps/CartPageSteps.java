@@ -10,7 +10,7 @@ import static util.Attachments.getBytes;
 public class CartPageSteps {
     CartPage cartPage = new CartPage();
 
-    @Step("проверяется что все добавленные товары находятся в корзине")
+    @Step("проверяет    ся что все добавленные товары находятся в корзине")
     public void checkAddProducts() {
         cartPage.checkProductInCart();
     }
