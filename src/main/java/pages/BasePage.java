@@ -1,9 +1,12 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import steps.BaseSteps;
 
 import java.util.HashMap;
@@ -18,19 +21,20 @@ public class BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    public Boolean isElementPresented(WebElement element) {
-        boolean notExist;
+    public void waitPageLoaded() {
+        new WebDriverWait(driver, 45)
+                .until((ExpectedCondition<Boolean>) webDriver -> !isElementPresented((By.xpath("//div[contains(@class , 'parandja')]"))));
+    }
+
+    public Boolean isElementPresented(By locator) {
         try {
             driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-            notExist = element.isDisplayed();
-
+            WebElement element = driver.findElement(locator);
+            return element.isDisplayed();
         } catch (NoSuchElementException e) {
-            notExist = false;
-        } finally {
             driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+            return false;
         }
-
-        return notExist;
     }
 
 }

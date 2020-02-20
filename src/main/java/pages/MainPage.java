@@ -29,16 +29,12 @@ public class MainPage extends BasePage {
 
 
     public void searchFor(String name) {
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        waitPageLoaded();
         Actions actions = new Actions(driver);
         actions.moveToElement(search).click().perform();
         search.sendKeys(Keys.ENTER);
         search.sendKeys(name);
-        if (isElementPresented(closeBanner)) {
+        if (isElementPresented(By.xpath("//div[contains(text(),'Бренды')]/..//span[contains(text(),'Посмотреть все')]"))) {
             closeBanner.click();
         }
         clickSearch.click();
